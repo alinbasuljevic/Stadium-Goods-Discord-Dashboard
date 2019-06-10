@@ -57,11 +57,13 @@ async def on_message(message):
             embed.add_field(name='Total Sales', value=paid_amount.text, inline=False)
             embed.add_field(name='Amount to be Paid', value=to_be_paid.text, inline=False)
             embed.add_field(name='Number of Shoes Sold in the Past 7 Days', value=shoes_sold_last.text, inline=False)
+            await message.channel.send(embed=embed)
  
         else:
             print ('ERROR!')
-
-        await message.channel.send(embed=embed)
+            embed = discord.Embed(title='Stadium Goods Sellers Portal')
+            embed.add_field(name = 'Error', value='Failed to Log In. Please Re-Enter Your Login Details.')
+            await message.channel.send(embed=embed)
 
 @client.event
 async def on_ready():
