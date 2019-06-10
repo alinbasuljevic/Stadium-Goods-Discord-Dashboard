@@ -2,7 +2,7 @@ import discord, requests, discord_webhook, datetime, time
 from bs4 import BeautifulSoup as bs
 
 
-TOKEN = 'XXXXXINSERTKEYHEREXXXXXXX'
+TOKEN = '############### INSERT TOKEN ###########'
 
 client = discord.Client()
 
@@ -41,7 +41,6 @@ async def on_message(message):
         login_request = s.post('https://sellers.stadiumgoods.com/users/sign_in', data=payload, headers=headers, allow_redirects=True)
         if login_request.url == 'https://sellers.stadiumgoods.com/sellers/dashboard':
             print ('LOGGED IN!')
-            webhook = '###########'
             soup = bs(login_request.text, 'lxml')
             list_of_text = []
             header_list = []
@@ -51,19 +50,19 @@ async def on_message(message):
             paid_amount = soup.find('h2', attrs={'class':'paid-amount'})
             to_be_paid = soup.find('h2', attrs={'class':'to-be-paid'})
             shoes_sold_last = soup.find('h2', attrs={'class':'shoes-sold-last-7'})
-            embed = discord.Embed(title='{} Stadium Goods Sellers Portal'.format(soup.find('h1').text), description='Last Updated on {}'.format(datetime.date.today()), inline=True)
+            embed = discord.Embed(title='{} Stadium Goods Sellers Portal'.format(soup.find('h1').text), description='Last Updated on {}'.format(datetime.date.today()), color=0x01e012, inline=True)
             embed.add_field(name='Account Number', value=list_of_text[1], inline=True)
             embed.add_field(name='Current Shoes in Inventory', value=shoes_listed.text, inline=False)
             embed.add_field(name='Total Sales', value=paid_amount.text, inline=False)
             embed.add_field(name='Amount to be Paid', value=to_be_paid.text, inline=False)
             embed.add_field(name='Number of Shoes Sold in the Past 7 Days', value=shoes_sold_last.text, inline=False)
             await message.channel.send(embed=embed)
- 
         else:
             print ('ERROR!')
-            embed = discord.Embed(title='Stadium Goods Sellers Portal')
+            embed = discord.Embed(title='Stadium Goods Sellers Portal', color=0xe10000)
             embed.add_field(name = 'Error', value='Failed to Log In. Please Re-Enter Your Login Details.')
             await message.channel.send(embed=embed)
+
 
 @client.event
 async def on_ready():
