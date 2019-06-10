@@ -2,7 +2,7 @@ import discord, requests, discord_webhook, datetime, time
 from bs4 import BeautifulSoup as bs
 
 
-TOKEN = 'NTAyMTM4MzMwOTgxMzM1MDQy.XP6ddg.46GgbuIgGQDorbBrdkPeU_5tRwE'
+TOKEN = 'XXXXXINSERTKEYHEREXXXXXXX'
 
 client = discord.Client()
 
